@@ -51,7 +51,7 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload entire repository
-          path: "${{ runner.temp }}/${{ github.sha }}"
+          path: "${{ runner.temp }}/${{ github.sha }}/browser"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
