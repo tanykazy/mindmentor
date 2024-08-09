@@ -1,0 +1,9 @@
+<mat-form-field id="form-field">
+    <mat-label>Enter your prompt here.</mat-label>
+    <textarea matInput [(ngModel)]="text" [rows]="rows" (input)="onInput($event)"
+        (keydown)="onKeydown($event)"></textarea>
+
+    <button matSuffix mat-icon-button color="primary" (click)="onClickSend($event)">
+        <mat-icon>send</mat-icon>
+    </button>
+</mat-form-field>

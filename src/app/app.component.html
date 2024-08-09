@@ -1,0 +1,19 @@
+<div class="container">
+    <mat-toolbar>
+        <span>{{title}}</span>
+        <span class="spacer"></span>
+        <button mat-button (click)="openDialog()">API Key</button>
+    </mat-toolbar>
+
+    <div class="message-list">
+        @for (content of history; track content) {
+        <app-message-card class="message-card" #messageCard [content]="content"></app-message-card>
+        }
+    </div>
+
+    <app-mindmap-field [code]="markdown"></app-mindmap-field>
+
+    <div class="input-field">
+        <app-input-field (sendMessage)="onSendMessage($event)"></app-input-field>
+    </div>
+</div>

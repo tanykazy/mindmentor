@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+}
+
+.message-list {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    overflow-anchor: unset;
+    height: 50vh;
+}
+
+.input-field {
+    max-height: 50vh;
+    bottom: 0;
+    width: 100%;
+}
+
+.message-card {
+    padding: 12px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
