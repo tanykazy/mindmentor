@@ -53,16 +53,33 @@ export class AppComponent {
 
     this.model = this.generativeAI.getGenerativeModel({
       model: 'gemini-1.5-pro',
-      systemInstruction: 'あなたは良きメンターあるいはコーチです。13才の私との対話を通して私の持つ概念を精緻化するように質問を繰り返してください。また話題が広がりすぎないようにし、中心となる概念を中心に質問を繰り返してください。私との対話の際には返答にその時点での概念地図として概念の階層構造を含めてください。概念の階層構造は、Markdown記法で記述し、コードブロックとして出力してください。',
+      systemInstruction: 'あなたは良きメンターあるいはコーチです。10代の私との対話を通して私の持つ概念を精緻化するように質問を繰り返してください。また話題が広がりすぎないようにし、中心となる概念を中心に質問を繰り返してください。私との対話の際には返答にその時点での概念地図として概念の階層構造を含めてください。概念の階層構造は、Markdown記法で記述し、コードブロックとして出力してください。',
     });
 
     this.initChatSession();
   }
 
-  initChatSession() {
+  async initChatSession() {
     this.chatSession = this.model.startChat();
 
     this.history = [];
+
+    const result = await this.chatSession.sendMessage('それでは始めてください。');
+
+    this.history.push({
+      role: 'model',
+      parts: [{ text: result.response.text() }],
+    });
+
+    const codeBlocks = this.extractCodeBlocks(result.response.text());
+    const code = [];
+    for (const codeBlock of codeBlocks) {
+      code.push(codeBlock.code);
+    }
+
+    if (code.length > 0) {
+      this.markdown = code.join('\n\n');
+    }
   }
 
   onSendMessage(event: string): void {
